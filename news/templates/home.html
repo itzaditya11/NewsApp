@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block body %}
+<section class="hero is-dark is-bold is-fullheight-with-navbar ">
+    <div class="hero-body">
+        <div class="container text-center">
+            <div class="row ">
+                
+                <div class="col-lg-2 justify-content-end">
+                    <div class="row">
+                        <div class="column  d-flex justify-content-end">
+                            {% load static %}
+                            <a href="{% url 'home' %}"><img class="img-fluid" src="{% static '1.jpg' %}" alt="logo"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-10 justify-content-center">
+                <h1 class="title" > NewsApp
+                </h1>
+                <h3 class="subheading"> Check All Latest News Here
+                <h5 class="caption">Updating news  Minute by Minute</h5>
+                </div>
+               
+
+            </div>
+            
+            
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container my-4">
+        <div class="row ">
+
+            {% for x in api.articles %}
+            <div class="col-lg-4 col-mid-6 col-sm-6 pt-2 mt-2 ">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{x.urlToImage}}" class="card-img-top" alt="{{x.source.image}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{x.title|truncatechars:50}}</h5>
+                        <p class="card-text">{{x.description|truncatechars:90}}</p>
+                        <a href="{{x.url}}" target="_blank" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+{%  endblock %}
